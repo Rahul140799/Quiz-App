@@ -70,17 +70,16 @@ class _MyAppState extends State<MyApp> {
   ];
 
   var _nextQuestion = 0;
-  var _totalScore = 0;   
-  
+  var _totalScore = 0;
+
   void _resetQuiz() {
     setState(() {
-        _nextQuestion = 0;
-        _totalScore = 0;   
+      _nextQuestion = 0;
+      _totalScore = 0;
     });
   }
 
   void _answerQuestion(int score) {
-
     _totalScore += score;
 
     setState(() {
@@ -99,18 +98,27 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("My First App"),
+          title: Center(
+            child: Column(
+              children: <Widget>[
+                Text(
+                  "Cricket Quiz",
+                  textAlign: TextAlign.center,
+                )
+              ],
+            ),
+          ),
         ),
         body: _nextQuestion < _questions.length
             ? Quiz(
                 answerQuestion: _answerQuestion,
                 questionIndex: _nextQuestion,
                 questions: _questions,
-            )
+              )
             : Result(
-              resultScore: _totalScore,
-              resetQuiz: _resetQuiz,
-            ),
+                resultScore: _totalScore,
+                resetQuiz: _resetQuiz,
+              ),
       ),
     );
   }
